@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Schedule</title>
+</head>
+<body>
+    <h2>Class Schedule</h2>
+    <table border="1">
+        <tr>
+            <th>Course Name</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Days</th>
+            <th>Location</th>
+        </tr>
+        {% for schedule in schedules %}
+        <tr>
+            <td>{{ schedule.course_name }}</td>
+            <td>{{ schedule.start_time }}</td>
+            <td>{{ schedule.end_time }}</td>
+            <td>{{ schedule.days }}</td>
+            <td>{{ schedule.location }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
