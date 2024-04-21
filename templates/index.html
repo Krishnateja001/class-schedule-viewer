@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Schedule</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Class Schedule</h1>
+    <form action="/" method="post">
+        <label for="class">Class:</label>
+        <select name="class" id="class">
+            <option value="">Class</option>
+            {% if classes %}
+                {% for class in classes %}
+                <option value="{{ class }}">{{ class }}</option>
+                {% endfor %}
+            {% endif %}
+        </select><br><br>
+        <label for="semester">Semester:</label>
+        <select name="semester" id="semester">
+            <option value="Fall-2024">Fall 2024</option>
+        </select><br><br>
+        <label for="instructors">Instructors:</label>
+        <select name="instructor" id="instructor">
+            <option value="">instructors</option>
+            {% if instructors %}
+                {% for instructor in instructors%}
+                <option value="{{ instructor }}">{{ instructor }}</option>
+                {% endfor %}
+            {% endif %}
+        </select><br><br>
+        <label>Student Type:</label><br>
+        <input type="radio" name="level" value="graduate" id="level">
+        <label for="graduate">Graduate</label><br>
+        
+        <input type="radio" name="level" value="undergraduate" id="level">
+        <label for="undergraduate">Undergraduate</label><br><br>
+        <!-- <input type="time" id="timeInput" name="time"> -->
+        <!-- Add other filter options -->
+        <input type="submit" value="Filter">
+    </form>
+    <h1>Map Graph</h1>
+    {{ plot_div | safe }}
+    <!-- Display class information grouped by campus -->
+    <div id="class_schedule">
+        {% if class_schedules %}
+            {% for schedule in class_schedules %}
+                <h2>{{ schedule['campus'] }}</h2>
+                <ul>
+                    {% for row in schedule %}
+                        <li>{{ row }}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        {% else %}
+            <p>No class schedules available.</p>
+        {% endif %}
+    </div>
+
+    </div>
+</body>
+</html>
